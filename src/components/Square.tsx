@@ -1,14 +1,17 @@
-export const Square = (
-    {
-        value,
-        onClick
-    }: { value: string, onClick: () => void }) => {
+type SquareProps = {
+    value: string;
+    onClick: () => void;
+    highlight?: boolean;
+};
+
+export const Square = ({ value, onClick, highlight = false }: SquareProps) => {
+    // Add a conditional style for the winning cell
+    const baseStyle = "cursor-pointer bg-slate-500 w-15 h-15 flex items-center justify-center rounded-sm";
+    const highlightStyle = highlight ? "bg-yellow-400" : "";
 
     return (
-        <>
-            <div className="font-sans font-medium cursor-pointer bg-slate-500 w-10 h-10 text-center p-2 rounded-sm text-white" onClick={onClick}>
-                {value}
-            </div>
-        </>
-    )
-}
+        <div className={`${baseStyle} ${highlightStyle}`} onClick={onClick}>
+            <span className="font-medium text-white">{value}</span>
+        </div>
+    );
+};
